@@ -2,7 +2,7 @@ package com.rpegorov.exeldatatobd.services.impl;
 
 import com.rpegorov.exeldatatobd.models.entity.Product;
 import com.rpegorov.exeldatatobd.services.interf.IFileUploaderService;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;

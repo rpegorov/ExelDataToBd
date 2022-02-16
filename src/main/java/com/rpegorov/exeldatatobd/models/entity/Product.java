@@ -21,11 +21,11 @@ public class Product implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private Long company_id;
-    private Long date;
     @Enumerated(EnumType.STRING)
     private ProductType productType;
     @Enumerated(EnumType.STRING)
     private DataType dataType;
+    private Long date;
 
     public Long getDate() {
         return date;

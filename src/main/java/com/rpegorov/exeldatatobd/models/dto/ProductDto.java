@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductDto {
     private Long company_id;
-    private Long date;
     private DataType dataType;
     private ProductType productType;
+    private Long date;
 
 }

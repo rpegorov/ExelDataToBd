@@ -1,11 +1,13 @@
 package com.rpegorov.exeldatatobd.services.impl;
 
+import com.rpegorov.exeldatatobd.models.dto.DataType;
+import com.rpegorov.exeldatatobd.models.dto.ProductType;
 import com.rpegorov.exeldatatobd.models.entity.Product;
 import com.rpegorov.exeldatatobd.repositories.ProductRepo;
 import com.rpegorov.exeldatatobd.services.interf.IExcelDataService;
-import lombok.Value;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -72,10 +74,10 @@ public class IExcelDataServiceImpl implements IExcelDataService {
         do {
             Product prd = new Product();
 
-            prd.setName(excelData.get(i));
-            prd.setAmount(Double.valueOf(excelData.get(i + 1)));
-            prd.setNumber(excelData.get(i + 2));
-            prd.setReceivedDate(excelData.get(i + 3));
+            prd.setDataType(DataType.valueOf(excelData.get(i)));
+            prd.setProductType(ProductType.valueOf(excelData.get(i + 1)));
+            prd.setDate(Long.valueOf(excelData.get(i + 2)));
+//            prd.set(excelData.get(i + 3));
 
             productArrayList.add(prd);
             i = i + (noOfColumns);
