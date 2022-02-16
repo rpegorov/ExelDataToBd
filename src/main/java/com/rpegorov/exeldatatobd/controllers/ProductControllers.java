@@ -1,9 +1,8 @@
 package com.rpegorov.exeldatatobd.controllers;
 
 import com.rpegorov.exeldatatobd.models.entity.Product;
+import com.rpegorov.exeldatatobd.services.interf.CompanyServices;
 import com.rpegorov.exeldatatobd.services.interf.IExcelDataService;
-import com.rpegorov.exeldatatobd.services.interf.InvoiceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +14,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-public class CompanyController {
+public class ProductControllers {
 
-    @Autowired
-    IFileUploaderService fileUploaderService;
-
-    @Autowired
-    IExcelDataService excelservice;
-
-    @Autowired
-    InvoiceRepository repo;
+    private IFileUploaderService fileUploaderService;
+    private IExcelDataService excelService;
 
     @GetMapping("/")
     public String index() {
@@ -41,7 +34,6 @@ public class CompanyController {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return "redirect:/";
@@ -50,8 +42,8 @@ public class CompanyController {
     @GetMapping("/saveData")
     public String saveExcelData(Model model) {
 
-        List<Product> excelDataAsList = excelservice.getExcelDataAsList();
-        int noOfRecords = excelservice.saveExcelData(excelDataAsList);
+        List<Product> excelDataAsList = excelService.getExcelDataAsList();
+        int noOfRecords = excelService.saveExcelData(excelDataAsList);
         model.addAttribute("noOfRecords",noOfRecords);
         return "success";
     }

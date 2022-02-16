@@ -2,11 +2,10 @@ package com.rpegorov.exeldatatobd.services.impl;
 
 import com.rpegorov.exeldatatobd.models.entity.Product;
 import com.rpegorov.exeldatatobd.services.interf.IExcelDataService;
-import com.rpegorov.exeldatatobd.services.interf.InvoiceRepository;
+import com.rpegorov.exeldatatobd.services.interf.ProductServices;
 import lombok.Value;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -18,11 +17,8 @@ import java.util.List;
 public class IExcelDataServiceImpl implements IExcelDataService {
 
     @Value("${app.upload.file:${user.home}}")
-    public String EXCEL_FILE_PATH;
-
-    @Autowired
-    InvoiceRepository repo;
-
+    private String EXCEL_FILE_PATH;
+    ProductServices repo;
     Workbook workbook;
 
     @Override
@@ -40,15 +36,11 @@ public class IExcelDataServiceImpl implements IExcelDataService {
             e.printStackTrace();
         }
 
-        // Retrieving the number of sheets in the Workbook
-        System.out.println("-------Workbook has '" + workbook.getNumberOfSheets() + "' Sheets-----");
-
         // Getting the Sheet at index zero
         Sheet sheet = workbook.getSheetAt(0);
 
         // Getting number of columns in the Sheet
         int noOfColumns = sheet.getRow(0).getLastCellNum();
-        System.out.println("-------Sheet has '"+noOfColumns+"' columns------");
 
         // Using for-each loop to iterate over the rows and columns
         for (Row row : sheet) {
