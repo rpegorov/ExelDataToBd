@@ -1,7 +1,6 @@
 package com.rpegorov.exeldatatobd.controllers;
 
 import com.rpegorov.exeldatatobd.models.entity.Product;
-import com.rpegorov.exeldatatobd.services.interf.CompanyServices;
 import com.rpegorov.exeldatatobd.services.interf.IExcelDataService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +40,6 @@ public class ProductControllers {
 
     @GetMapping("/saveData")
     public String saveExcelData(Model model) {
-
         List<Product> excelDataAsList = excelService.getExcelDataAsList();
         int noOfRecords = excelService.saveExcelData(excelDataAsList);
         model.addAttribute("noOfRecords",noOfRecords);

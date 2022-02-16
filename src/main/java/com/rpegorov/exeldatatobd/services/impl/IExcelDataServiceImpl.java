@@ -1,8 +1,8 @@
 package com.rpegorov.exeldatatobd.services.impl;
 
 import com.rpegorov.exeldatatobd.models.entity.Product;
+import com.rpegorov.exeldatatobd.repositories.ProductRepo;
 import com.rpegorov.exeldatatobd.services.interf.IExcelDataService;
-import com.rpegorov.exeldatatobd.services.interf.ProductServices;
 import lombok.Value;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
@@ -18,7 +18,8 @@ public class IExcelDataServiceImpl implements IExcelDataService {
 
     @Value("${app.upload.file:${user.home}}")
     private String EXCEL_FILE_PATH;
-    ProductServices repo;
+
+    ProductRepo repo;
     Workbook workbook;
 
     @Override
@@ -65,16 +66,16 @@ public class IExcelDataServiceImpl implements IExcelDataService {
 
     private List<Product> createList(List<String> excelData, int noOfColumns) {
 
-        ArrayList<Product> productArrayList = new ArrayList<Product>();
+        ArrayList<Product> productArrayList = new ArrayList<>();
 
         int i = noOfColumns;
         do {
             Product prd = new Product();
 
-//            prd.setName(excelData.get(i));
-//            prd.setAmount(Double.valueOf(excelData.get(i + 1)));
-//            prd.setNumber(excelData.get(i + 2));
-//            prd.setReceivedDate(excelData.get(i + 3));
+            prd.setName(excelData.get(i));
+            prd.setAmount(Double.valueOf(excelData.get(i + 1)));
+            prd.setNumber(excelData.get(i + 2));
+            prd.setReceivedDate(excelData.get(i + 3));
 
             productArrayList.add(prd);
             i = i + (noOfColumns);
@@ -85,7 +86,7 @@ public class IExcelDataServiceImpl implements IExcelDataService {
 
     @Override
     public int saveExcelData(List<Product> products) {
-        products = repo.saveAll(products);
+        products = (List<Product>) repo.saveAll(products);
         return products.size();
     }
     }
