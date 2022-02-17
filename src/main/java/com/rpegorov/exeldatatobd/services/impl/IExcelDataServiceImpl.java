@@ -6,7 +6,9 @@ import com.rpegorov.exeldatatobd.models.entity.Product;
 import com.rpegorov.exeldatatobd.repositories.ProductRepo;
 import com.rpegorov.exeldatatobd.services.interf.IExcelDataService;
 import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +36,8 @@ public class IExcelDataServiceImpl implements IExcelDataService {
 
         // Create the Workbook
         try {
-            workbook = WorkbookFactory.create(new File(EXCEL_FILE_PATH));
-        } catch (EncryptedDocumentException | IOException e) {
+            workbook = new XSSFWorkbook(new File(EXCEL_FILE_PATH));
+        } catch (EncryptedDocumentException | IOException | InvalidFormatException e) {
             e.printStackTrace();
         }
 
@@ -74,8 +76,8 @@ public class IExcelDataServiceImpl implements IExcelDataService {
         do {
             Product prd = new Product();
 
-            prd.setDataType(DataType.valueOf(excelData.get(i)));
-            prd.setProductType(ProductType.valueOf(excelData.get(i + 1)));
+//            prd.setDataType(DataType.valueOf(excelData.get(i)));
+//            prd.setProductType(ProductType.valueOf(excelData.get(i + 1)));
             prd.setDate(Long.valueOf(excelData.get(i + 2)));
 //            prd.set(excelData.get(i + 3));
 
