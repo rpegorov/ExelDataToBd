@@ -32,7 +32,7 @@ public class IExcelDataServiceImpl implements IExcelDataService {
         DataFormatter dataFormatter = new DataFormatter();
         try {
             workbook = new XSSFWorkbook(new File(EXCEL_FILE_PATH));
-        } catch (EncryptedDocumentException | IOException | InvalidFormatException e) {
+        } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
         }
         Sheet sheet = workbook.getSheetAt(0);
@@ -49,7 +49,6 @@ public class IExcelDataServiceImpl implements IExcelDataService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return productsList;
     }
 
