@@ -1,10 +1,11 @@
 package com.rpegorov.exeldatatobd.controllers;
 
+import com.rpegorov.exeldatatobd.models.entity.Company;
 import com.rpegorov.exeldatatobd.models.entity.Product;
-import com.rpegorov.exeldatatobd.services.interf.IExcelDataService;
+import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceCompany;
+import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceProduct;
 import com.rpegorov.exeldatatobd.services.interf.IFileUploaderService;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,8 @@ import java.util.List;
 public class ProductControllers {
 
     private final IFileUploaderService fileUploaderService;
-    private final IExcelDataService excelService;
+//    private final IExcelDataServiceProduct excelDataServiceProduct;
+    private final IExcelDataServiceCompany excelDataServiceCompany;
 
 
     @GetMapping("/")
@@ -45,8 +47,8 @@ public class ProductControllers {
 
     @GetMapping("/saveData")
     public String saveExcelData(Model model) {
-        List<Product> excelDataAsList = excelService.getExcelDataAsList();
-        int noOfRecords = excelService.saveExcelData(excelDataAsList);
+        List<Company> excelDataAsList = excelDataServiceCompany.getExcelDataAsList();
+        int noOfRecords = excelDataServiceCompany.saveExcelData(excelDataAsList);
         model.addAttribute("noOfRecords",noOfRecords);
         return "success";
     }

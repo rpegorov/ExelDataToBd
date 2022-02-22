@@ -1,10 +1,10 @@
 package com.rpegorov.exeldatatobd.services.impl;
 
-import com.rpegorov.exeldatatobd.models.entity.Product;
-import com.rpegorov.exeldatatobd.repositories.ProductRepo;
-import com.rpegorov.exeldatatobd.services.CreateArrList;
-import com.rpegorov.exeldatatobd.services.interf.IExcelDataService;
-import org.apache.poi.EncryptedDocumentException;
+import com.rpegorov.exeldatatobd.models.entity.Company;
+import com.rpegorov.exeldatatobd.repositories.CompanyRepo;
+import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceCompany;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -16,45 +16,50 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.rpegorov.exeldatatobd.services.CreateArrList.createList;
+
 @Service
-public class IExcelDataServiceImpl implements IExcelDataService {
+@RequiredArgsConstructor
+public class IExcelDataServiceCompanyImpl implements IExcelDataServiceCompany {
 
     @Value("${app.upload.file:${user.home}}")
     private String EXCEL_FILE_PATH;
 
-    ProductRepo repo;
-    Workbook workbook;
+    private final CompanyRepo repo;
+    private Workbook workbook;
 
     @Override
-    public List<Product> getExcelDataAsList() {
-
-        List<String> list = new ArrayList<>();
+    public List<Company> getExcelDataAsList() {
         DataFormatter dataFormatter = new DataFormatter();
         try {
             workbook = new XSSFWorkbook(new File(EXCEL_FILE_PATH));
         } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
         }
+        List<String> list = new ArrayList<>();
         Sheet sheet = workbook.getSheetAt(0);
         int noOfColumns = sheet.getRow(0).getLastCellNum();
         for (Row row : sheet) {
             for (Cell cell : row) {
                 String cellValue = dataFormatter.formatCellValue(cell);
-                list.add(cellValue);
+                if (!cellValue.isEmpty()) {
+                    list.add(cellValue);
+                }
             }
         }
-        List<Product> productsList = CreateArrList.createList(list, noOfColumns);
+        System.out.println(list);
+        var companyList = createList(list, noOfColumns);
         try {
             workbook.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return productsList;
+        return companyList;
     }
 
     @Override
-    public int saveExcelData(List<Product> products) {
-        products = (List<Product>) repo.saveAll(products);
-        return products.size();
+    public int saveExcelData(List<Company> companies) {
+        companies = (List<Company>) repo.saveAll(companies);
+        return companies.size();
     }
 }
