@@ -2,10 +2,8 @@ package com.rpegorov.exeldatatobd.models.entity;
 
 import com.rpegorov.exeldatatobd.models.dto.DataType;
 import com.rpegorov.exeldatatobd.models.dto.ProductType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +11,10 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
