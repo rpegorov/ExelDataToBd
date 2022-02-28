@@ -1,9 +1,8 @@
 package com.rpegorov.exeldatatobd.services.impl;
 
-import com.rpegorov.exeldatatobd.models.entity.Company;
-import com.rpegorov.exeldatatobd.repositories.CompanyRepo;
+import com.rpegorov.exeldatatobd.models.entity.Orders;
+import com.rpegorov.exeldatatobd.repositories.OrdersRepository;
 import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceCompany;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -25,11 +24,11 @@ public class IExcelDataServiceCompanyImpl implements IExcelDataServiceCompany {
     @Value("${app.upload.file:${user.home}}")
     private String EXCEL_FILE_PATH;
 
-    private final CompanyRepo repo;
+    private final OrdersRepository repo;
     private Workbook workbook;
 
     @Override
-    public List<Company> getExcelDataAsList() {
+    public List<Orders> getExcelDataAsList() {
         DataFormatter dataFormatter = new DataFormatter();
         try {
             workbook = new XSSFWorkbook(new File(EXCEL_FILE_PATH));
@@ -58,8 +57,8 @@ public class IExcelDataServiceCompanyImpl implements IExcelDataServiceCompany {
     }
 
     @Override
-    public int saveExcelData(List<Company> companies) {
-        companies = (List<Company>) repo.saveAll(companies);
-        return companies.size();
+    public int saveExcelData(List<Orders> companies) {
+        List<Orders> saved = repo.saveAll(companies);
+        return saved.size();
     }
 }

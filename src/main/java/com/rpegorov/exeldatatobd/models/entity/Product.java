@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.OffsetDateTime;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -20,34 +22,31 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private Long company_id;
+
     @Enumerated(EnumType.STRING)
     private ProductType productType;
+
     @Enumerated(EnumType.STRING)
     private DataType dataType;
-    private Long date;
 
-    public Long getDate() {
-        return date;
+    private OffsetDateTime date;
+
+    @ManyToOne()
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Orders orders;
+
+    private Integer amount;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Product product = (Product) o;
+        return id != null && Objects.equals(id, product.id);
     }
 
-    public void setDate(Long date) {
-        this.date = date;
-    }
-
-    public ProductType getProductType() {
-        return productType;
-    }
-
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
-    }
-
-    public DataType getDataType() {
-        return dataType;
-    }
-
-    public void setDataType(DataType dataType) {
-        this.dataType = dataType;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

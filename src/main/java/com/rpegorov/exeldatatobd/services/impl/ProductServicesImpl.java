@@ -10,7 +10,7 @@ public class ProductServicesImpl implements PostService<Product> {
     @Override
     public void createEntity(Product product) {
         var entity = Product.builder()
-                .company_id(product.getCompany_id())
+//                .company_id(product.getCompany_id())
                 .date(product.getDate())
                 .productType(product.getProductType())
                 .dataType(product.getDataType())

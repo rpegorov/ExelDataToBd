@@ -1,13 +1,12 @@
 package com.rpegorov.exeldatatobd.services.interf;
 
-import com.rpegorov.exeldatatobd.models.entity.Company;
-import com.rpegorov.exeldatatobd.models.entity.Product;
+import com.rpegorov.exeldatatobd.models.entity.Orders;
 
 import java.util.List;
 
 public interface IExcelDataServiceCompany {
 
-    List<Company> getExcelDataAsList();
+    List<Orders> getExcelDataAsList();
 
     int saveExcelData(List<Orders> orders);
 }
