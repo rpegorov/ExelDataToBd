@@ -9,5 +9,5 @@ public interface IExcelDataServiceCompany {
 
     List<Company> getExcelDataAsList();
 
-    int saveExcelData(List<Company> companies);
+    int saveExcelData(List<Orders> orders);
 }

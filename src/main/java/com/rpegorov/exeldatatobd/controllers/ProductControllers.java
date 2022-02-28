@@ -47,9 +47,9 @@ public class ProductControllers {
 
     @GetMapping("/saveData")
     public String saveExcelData(Model model) {
-        List<Company> excelDataAsList = excelDataServiceCompany.getExcelDataAsList();
-        int noOfRecords = excelDataServiceCompany.saveExcelData(excelDataAsList);
-        model.addAttribute("noOfRecords",noOfRecords);
+        List<Orders> excelDataAsList = excelDataServiceCompany.getExcelDataAsList();
+        var noOfRecords = excelDataServiceCompany.saveExcelData(excelDataAsList);
+        model.addAttribute("noOfRecords", noOfRecords);
         return "success";
     }
 }
