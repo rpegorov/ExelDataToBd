@@ -12,11 +12,22 @@ import java.util.List;
 
 import static java.time.format.DateTimeFormatter.*;
 
+/**
+ * Class for decoding received data from Excel and creating a List
+ */
 public class CreateArrList {
 
+    /**
+     * @param excelData data obtained after reading excel workbook
+     * @see com.rpegorov.exeldatatobd.services.impl.IExcelDataServiceOrdersImpl
+     * @param noOfColumns column counter
+     * skipHead - number of header lines to skip
+     * @return ordersArrayList
+     */
     public static List<Orders> createList(List<String> excelData, int noOfColumns) {
-        ArrayList<Orders> companyArrayList = new ArrayList<>();
+        ArrayList<Orders> ordersArrayList = new ArrayList<>();
         var i = noOfColumns;
+        var skipHead = 15;
 
         var factQliqDate1 = LocalDate.parse(excelData.get(8),
                 ofPattern("d/M/yyyy").withZone(ZoneId.of("Europe/Moscow")));
@@ -40,7 +51,7 @@ public class CreateArrList {
 
         do {
             var k = 0;
-            for (k = 15; k < excelData.size() - 1; k += 10) {
+            for (k = skipHead; k < excelData.size() - 1; k += 10) {
                 Orders order = new Orders();
                 order.setId(Long.valueOf(excelData.get(k + 1)));
                 order.setCompany(excelData.get(k + 2));
@@ -54,10 +65,10 @@ public class CreateArrList {
                 order.getProducts().add(createProduct(ProductType.QOIL, forecastQoilDate2, DataType.FORECAST, Integer.valueOf(excelData.get(k + 10)), order));
 
                 i = i + (noOfColumns);
-                companyArrayList.add(order);
+                ordersArrayList.add(order);
             }
         } while (i < excelData.size());
-        return companyArrayList;
+        return ordersArrayList;
     }
 
     private static Product createProduct(ProductType type, LocalDate date, DataType dataType, Integer amount, Orders orders) {
@@ -68,7 +79,6 @@ public class CreateArrList {
         product.setAmount(amount);
         product.setOrders(orders);
         return product;
-
     }
 
     private static LocalDate createDate(LocalDate date) {

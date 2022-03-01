@@ -17,6 +17,9 @@ import java.util.List;
 
 import static com.rpegorov.exeldatatobd.services.CreateArrList.createList;
 
+/**
+ * Class service parsing Excel file to List
+ */
 @Service
 @RequiredArgsConstructor
 public class IExcelDataServiceOrdersImpl implements IExcelDataServiceOrders {
@@ -27,6 +30,14 @@ public class IExcelDataServiceOrdersImpl implements IExcelDataServiceOrders {
     private final OrdersRepository repo;
     private Workbook workbook;
 
+    /**
+     * DataFormatter contains methods for formatting the value stored in an Cell.
+     * XSSFWorkbook object from a given file.
+     * Workbook checks a Format file (.xlsx and .xls) else exception, no exception - handling e.printStackTrace
+     * Checking for an empty string is needed to exclude such strings from falling into the list,
+     * empty lines are contained in merged cells.
+     * @return ordersList
+     */
     @Override
     public List<Orders> getExcelDataAsList() {
         DataFormatter dataFormatter = new DataFormatter();

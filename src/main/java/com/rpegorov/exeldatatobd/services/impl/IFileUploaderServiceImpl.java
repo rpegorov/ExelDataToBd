@@ -12,14 +12,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
 
+/**
+ * Class service to upload file.
+ */
 @Service
 public class IFileUploaderServiceImpl implements IFileUploaderService {
-
-    public List<Product> productsExcelReaderService() {
-        return null;
-    }
 
     @Value("${app.upload.dir:${user.home}}")
     public String uploadDir;

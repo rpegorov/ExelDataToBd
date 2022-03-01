@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Class describing Entity model for Product
+ */
 @Entity
 @Getter
 @Setter
@@ -31,6 +34,9 @@ public class Product implements Serializable {
 
     private LocalDate date;
 
+    /**
+     * Setting relationships between tables, setting a link to Orders in Product
+     */
     @ManyToOne()
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Orders orders;

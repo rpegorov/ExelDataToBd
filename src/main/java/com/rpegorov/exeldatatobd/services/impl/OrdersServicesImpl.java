@@ -5,6 +5,9 @@ import com.rpegorov.exeldatatobd.repositories.OrdersRepository;
 import com.rpegorov.exeldatatobd.services.interf.PostService;
 import org.springframework.stereotype.Service;
 
+/**
+ * Class create Entity Orders
+ */
 @Service
 public class OrdersServicesImpl implements PostService<Orders> {
     private OrdersRepository ordersRepository;

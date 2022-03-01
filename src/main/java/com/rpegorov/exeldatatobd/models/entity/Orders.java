@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class describing Entity model for Orders
+ */
 @Getter
 @Setter
 @ToString
@@ -23,6 +26,9 @@ public class Orders implements Serializable {
 
     private String company;
 
+    /**
+     * Setting relationships between tables, setting a pointer to Orders in Product
+     */
     @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Product>products = new ArrayList<>();

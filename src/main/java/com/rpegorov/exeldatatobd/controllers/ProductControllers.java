@@ -14,19 +14,31 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * class controllers
+ */
 @Controller
 @RequiredArgsConstructor
 public class ProductControllers {
 
     private final IFileUploaderService fileUploaderService;
-    private final IExcelDataServiceOrders excelDataServiceCompany;
+    private final IExcelDataServiceOrders excelDataServiceOrders;
 
-
+    /**
+     * Start page
+     * @return start page
+     */
     @GetMapping("/")
     public String index() {
         return "uploadPage";
     }
 
+    /**
+     * UploadPage and output massage
+     * @param file to upload original file
+     * @param redirectAttributes get attribute file - original file name
+     * @return if upload is success redirect to save data page, and completion message output, else redirect to start page
+     */
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 
@@ -42,10 +54,16 @@ public class ProductControllers {
         return "redirect:/";
     }
 
+    /**
+     * Save Data page
+     * @param model model entity to save,
+     * @see Orders entiry to save
+     * @return completion message
+     */
     @GetMapping("/saveData")
     public String saveExcelData(Model model) {
-        List<Orders> excelDataAsList = excelDataServiceCompany.getExcelDataAsList();
-        var noOfRecords = excelDataServiceCompany.saveExcelData(excelDataAsList);
+        List<Orders> excelDataAsList = excelDataServiceOrders.getExcelDataAsList();
+        var noOfRecords = excelDataServiceOrders.saveExcelData(excelDataAsList);
         model.addAttribute("noOfRecords", noOfRecords);
         return "success";
     }

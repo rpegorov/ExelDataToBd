@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+/**
+ * Class Builder Product data transfer object
+ */
 @Data
 @Builder
 @NoArgsConstructor
