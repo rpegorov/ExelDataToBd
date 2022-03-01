@@ -37,7 +37,7 @@ public class IExcelDataServiceOrdersImpl implements IExcelDataServiceOrders {
         }
         List<String> list = new ArrayList<>();
         Sheet sheet = workbook.getSheetAt(0);
-        int noOfColumns = sheet.getRow(0).getLastCellNum();
+        var noOfColumns = sheet.getRow(0).getLastCellNum();
         for (Row row : sheet) {
             for (Cell cell : row) {
                 String cellValue = dataFormatter.formatCellValue(cell);

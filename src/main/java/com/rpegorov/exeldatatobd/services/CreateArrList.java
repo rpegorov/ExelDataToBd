@@ -54,7 +54,6 @@ public class CreateArrList {
                 order.getProducts().add(createProduct(ProductType.QOIL, forecastQoilDate2, DataType.FORECAST, Integer.valueOf(excelData.get(k + 10)), order));
 
                 i = i + (noOfColumns);
-
                 companyArrayList.add(order);
             }
         } while (i < excelData.size());

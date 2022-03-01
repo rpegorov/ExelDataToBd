@@ -19,5 +19,4 @@ public class ProductDto {
     @Enumerated(EnumType.STRING)
     private ProductType productType;
     private Long date;
-
 }
