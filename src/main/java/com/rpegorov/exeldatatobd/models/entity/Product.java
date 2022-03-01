@@ -3,12 +3,9 @@ package com.rpegorov.exeldatatobd.models.entity;
 import com.rpegorov.exeldatatobd.models.dto.DataType;
 import com.rpegorov.exeldatatobd.models.dto.ProductType;
 import lombok.*;
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * Class describing Entity model for Product
