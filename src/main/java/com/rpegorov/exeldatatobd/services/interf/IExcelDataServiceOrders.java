@@ -4,7 +4,7 @@ import com.rpegorov.exeldatatobd.models.entity.Orders;
 
 import java.util.List;
 
-public interface IExcelDataServiceCompany {
+public interface IExcelDataServiceOrders {
 
     List<Orders> getExcelDataAsList();
 

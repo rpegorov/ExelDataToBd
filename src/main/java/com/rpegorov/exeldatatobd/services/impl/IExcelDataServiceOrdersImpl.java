@@ -2,7 +2,7 @@ package com.rpegorov.exeldatatobd.services.impl;
 
 import com.rpegorov.exeldatatobd.models.entity.Orders;
 import com.rpegorov.exeldatatobd.repositories.OrdersRepository;
-import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceCompany;
+import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceOrders;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -19,7 +19,7 @@ import static com.rpegorov.exeldatatobd.services.CreateArrList.createList;
 
 @Service
 @RequiredArgsConstructor
-public class IExcelDataServiceCompanyImpl implements IExcelDataServiceCompany {
+public class IExcelDataServiceOrdersImpl implements IExcelDataServiceOrders {
 
     @Value("${app.upload.file:${user.home}}")
     private String EXCEL_FILE_PATH;
@@ -47,18 +47,18 @@ public class IExcelDataServiceCompanyImpl implements IExcelDataServiceCompany {
             }
         }
         System.out.println(list);
-        var companyList = createList(list, noOfColumns);
+        var ordersList = createList(list, noOfColumns);
         try {
             workbook.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return companyList;
+        return ordersList;
     }
 
     @Override
-    public int saveExcelData(List<Orders> companies) {
-        List<Orders> saved = repo.saveAll(companies);
+    public int saveExcelData(List<Orders> orders) {
+        List<Orders> saved = repo.saveAll(orders);
         return saved.size();
     }
 }

@@ -1,10 +1,7 @@
 package com.rpegorov.exeldatatobd.controllers;
 
-import com.rpegorov.exeldatatobd.models.entity.Company;
 import com.rpegorov.exeldatatobd.models.entity.Orders;
-import com.rpegorov.exeldatatobd.models.entity.Product;
-import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceCompany;
-import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceProduct;
+import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceOrders;
 import com.rpegorov.exeldatatobd.services.interf.IFileUploaderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,8 +19,7 @@ import java.util.List;
 public class ProductControllers {
 
     private final IFileUploaderService fileUploaderService;
-//    private final IExcelDataServiceProduct excelDataServiceProduct;
-    private final IExcelDataServiceCompany excelDataServiceCompany;
+    private final IExcelDataServiceOrders excelDataServiceCompany;
 
 
     @GetMapping("/")

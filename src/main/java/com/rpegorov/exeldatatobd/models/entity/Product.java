@@ -7,7 +7,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +16,6 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Product implements Serializable {
 
@@ -30,13 +29,14 @@ public class Product implements Serializable {
     @Enumerated(EnumType.STRING)
     private DataType dataType;
 
-    private OffsetDateTime date;
+    private LocalDate date;
 
     @ManyToOne()
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Orders orders;
 
     private Integer amount;
+
 
     @Override
     public boolean equals(Object o) {
