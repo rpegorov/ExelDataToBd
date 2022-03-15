@@ -15,7 +15,7 @@ public class ProductServicesImpl implements PostService<Product> {
     @Override
     public void createEntity(Product product) {
         var entity = Product.builder()
-                .date(product.getDate())
+                .dataColum(product.getDataColum())
                 .productType(product.getProductType())
                 .dataType(product.getDataType())
                 .build();

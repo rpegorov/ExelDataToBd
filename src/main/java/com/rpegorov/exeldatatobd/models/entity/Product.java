@@ -1,5 +1,6 @@
 package com.rpegorov.exeldatatobd.models.entity;
 
+import com.rpegorov.exeldatatobd.models.dto.DataColum;
 import com.rpegorov.exeldatatobd.models.dto.DataType;
 import com.rpegorov.exeldatatobd.models.dto.ProductType;
 import lombok.*;
@@ -29,7 +30,8 @@ public class Product implements Serializable {
     @Enumerated(EnumType.STRING)
     private DataType dataType;
 
-    private LocalDate date;
+    @Enumerated(EnumType.STRING)
+    private DataColum dataColum;
 
     /**
      * Setting relationships between tables, setting a link to Orders in Product
