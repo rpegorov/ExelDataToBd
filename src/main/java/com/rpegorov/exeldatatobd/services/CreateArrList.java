@@ -18,11 +18,11 @@ import static java.time.format.DateTimeFormatter.*;
 public class CreateArrList {
 
     /**
-     * @param excelData data obtained after reading excel workbook
-     * @see com.rpegorov.exeldatatobd.services.impl.IExcelDataServiceOrdersImpl
+     * @param excelData   data obtained after reading excel workbook
      * @param noOfColumns column counter
-     * skipHead - number of header lines to skip
+     *                    skipHead - number of header lines to skip
      * @return ordersArrayList
+     * @see com.rpegorov.exeldatatobd.services.impl.IExcelDataServiceOrdersImpl
      */
     public static List<Orders> createList(List<String> excelData, int noOfColumns) {
         ArrayList<Orders> ordersArrayList = new ArrayList<>();
@@ -35,14 +35,9 @@ public class CreateArrList {
                 Orders order = new Orders();
                 order.setId(Long.valueOf(excelData.get(k + 1)));
                 order.setCompany(excelData.get(k + 2));
-                order.getProducts().add(createProduct(ProductType.QLIQ, DataColum.DATA1, DataType.FACT, Integer.valueOf(excelData.get(k + 3)), order));
-                order.getProducts().add(createProduct(ProductType.QLIQ, DataColum.DATA2, DataType.FACT, Integer.valueOf(excelData.get(k + 4)), order));
-                order.getProducts().add(createProduct(ProductType.QOIL, DataColum.DATA1, DataType.FACT, Integer.valueOf(excelData.get(k + 5)), order));
-                order.getProducts().add(createProduct(ProductType.QOIL, DataColum.DATA2, DataType.FACT, Integer.valueOf(excelData.get(k + 6)), order));
-                order.getProducts().add(createProduct(ProductType.QLIQ, DataColum.DATA1, DataType.FORECAST, Integer.valueOf(excelData.get(k + 7)), order));
-                order.getProducts().add(createProduct(ProductType.QLIQ, DataColum.DATA2, DataType.FORECAST, Integer.valueOf(excelData.get(k + 8)), order));
-                order.getProducts().add(createProduct(ProductType.QOIL, DataColum.DATA1, DataType.FORECAST, Integer.valueOf(excelData.get(k + 9)), order));
-                order.getProducts().add(createProduct(ProductType.QOIL, DataColum.DATA2, DataType.FORECAST, Integer.valueOf(excelData.get(k + 10)), order));
+                var date1 = LocalDate.of(2022, 6, 15);
+                var date2 = LocalDate.of(2022, 6, 20);
+                getProducts(excelData, k, date1, date2, order);
 
                 i = i + (noOfColumns);
                 ordersArrayList.add(order);
@@ -51,19 +46,25 @@ public class CreateArrList {
         return ordersArrayList;
     }
 
-    private static Product createProduct(ProductType type, DataColum dataColum, DataType dataType, Integer amount, Orders orders) {
+    private static void getProducts(List<String> excelData, int k, LocalDate date1, LocalDate date2, Orders order) {
+        order.getProducts().add(createProduct(ProductType.QLIQ, DataColum.DATA1, DataType.FACT, Integer.valueOf(excelData.get(k + 3)), date1, order));
+        order.getProducts().add(createProduct(ProductType.QLIQ, DataColum.DATA2, DataType.FACT, Integer.valueOf(excelData.get(k + 4)), date2, order));
+        order.getProducts().add(createProduct(ProductType.QOIL, DataColum.DATA1, DataType.FACT, Integer.valueOf(excelData.get(k + 5)), date1, order));
+        order.getProducts().add(createProduct(ProductType.QOIL, DataColum.DATA2, DataType.FACT, Integer.valueOf(excelData.get(k + 6)), date2, order));
+        order.getProducts().add(createProduct(ProductType.QLIQ, DataColum.DATA1, DataType.FORECAST, Integer.valueOf(excelData.get(k + 7)), date1, order));
+        order.getProducts().add(createProduct(ProductType.QLIQ, DataColum.DATA2, DataType.FORECAST, Integer.valueOf(excelData.get(k + 8)), date2, order));
+        order.getProducts().add(createProduct(ProductType.QOIL, DataColum.DATA1, DataType.FORECAST, Integer.valueOf(excelData.get(k + 9)), date1, order));
+        order.getProducts().add(createProduct(ProductType.QOIL, DataColum.DATA2, DataType.FORECAST, Integer.valueOf(excelData.get(k + 10)), date2, order));
+    }
+
+    private static Product createProduct(ProductType type, DataColum dataColum, DataType dataType, Integer amount, LocalDate date, Orders orders) {
         Product product = new Product();
         product.setDataColum(dataColum);
         product.setProductType(type);
         product.setDataType(dataType);
         product.setAmount(amount);
+        product.setLocalDate(date);
         product.setOrders(orders);
         return product;
-    }
-
-    private static LocalDate createDate(LocalDate date) {
-        String dateFormat = "dd-MM-yyyy";
-        date.atStartOfDay().format(ofPattern(dateFormat));
-        return date;
     }
 }

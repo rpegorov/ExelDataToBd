@@ -39,7 +39,7 @@ select p.product_type, p.amount
 from product p
 where product_type = 'QLIQ'
 
-select p.product_type, p.amount, p.date
+select p.product_type, p.amount, p.local_date
 from product p
 where product_type = 'QOIL'
 
@@ -51,33 +51,33 @@ select avg(p.amount)
 from product p
 where product_type = 'QLIQ'
 
--- products by date 2019-01-14
-select p.amount, p.product_type, p.date
+-- products by date
+select p.amount, p.local_date
 from product p
-where p.date = '2019-01-14'
+where p.local_date = '2022-06-15'
 
--- products by date 2021-02-28
-select p.amount, p.product_type, p.date, o.company
+-- products by date
+select p.amount, p.product_type, p.local_date, o.company
 from product p join orders o on p.order_id = o.id
-where p.date = '2021-02-28'
+where p.local_date = '2022-06-15'
 
 -- product by data_type FORECAST
-select p.amount, p.date, o.company, p.data_type
+select p.amount, p.local_date, o.company, p.data_type
 from product p join orders o on p.order_id = o.id
 where p.data_type = 'FORECAST'
 
 -- product by data_type FACT
-select p.amount, p.date, o.company, p.data_type
+select p.amount, p.local_date, o.company, p.data_type
 from product p join orders o on p.order_id = o.id
 where p.data_type = 'FACT'
 
 -- all products company1
-select o.company, p.amount, product_type, p.data_type, p.date
+select o.company, p.amount, product_type, p.data_type
 from orders o join product p on o.id = p.order_id
 where o.company like 'company1'
 
 -- all products company2
-select o.company, p.amount, product_type, p.data_type, p.date
+select o.company, p.amount, product_type, p.data_type
 from orders o join product p on o.id = p.order_id
 where o.company like 'company2'
 

@@ -18,6 +18,7 @@ public class ProductServicesImpl implements PostService<Product> {
                 .dataColum(product.getDataColum())
                 .productType(product.getProductType())
                 .dataType(product.getDataType())
+                .localDate(product.getLocalDate())
                 .build();
         productRepo.save(entity);
     }

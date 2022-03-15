@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDate;
 
 /**
  * Class Builder Product data transfer object
@@ -22,4 +23,5 @@ public class ProductDto {
     @Enumerated(EnumType.STRING)
     private ProductType productType;
     private Long date;
+    private LocalDate localDate;
 }
