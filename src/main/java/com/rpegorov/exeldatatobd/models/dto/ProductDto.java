@@ -17,11 +17,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
+
     private Long company_id;
+
     @Enumerated(EnumType.STRING)
     private DataType dataType;
+
     @Enumerated(EnumType.STRING)
     private ProductType productType;
+
     private Long date;
+
     private LocalDate localDate;
 }

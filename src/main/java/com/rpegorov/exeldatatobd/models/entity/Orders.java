@@ -28,7 +28,7 @@ public class Orders implements Serializable {
      */
     @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Product>products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     public void setId(Long id) {
         this.id = id;

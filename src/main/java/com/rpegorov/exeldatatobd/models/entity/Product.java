@@ -43,5 +43,4 @@ public class Product implements Serializable {
     private Integer amount;
 
     private LocalDate localDate;
-
 }

@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
 /**
  * class controllers
  */
@@ -62,7 +60,7 @@ public class ProductControllers {
      */
     @GetMapping("/saveData")
     public String saveExcelData(Model model) {
-        List<Orders> excelDataAsList = excelDataServiceOrders.getExcelDataAsList();
+        var excelDataAsList = excelDataServiceOrders.getExcelDataAsList();
         var noOfRecords = excelDataServiceOrders.saveExcelData(excelDataAsList);
         model.addAttribute("noOfRecords", noOfRecords);
         return "success";

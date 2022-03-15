@@ -26,7 +26,7 @@ public class IFileUploaderServiceImpl implements IFileUploaderService {
     public void uploadFile(MultipartFile file) {
 
         try {
-            Path copyLocation = Paths
+            var copyLocation = Paths
                     .get(uploadDir + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
             Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
