@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
+/**
+ * Class a create all QLIQ Forecast Product implements ProductCreator
+ * Strategy pattern
+ */
 @Service
 public class ProductQOILForecastCreator implements ProductCreator {
     @Override

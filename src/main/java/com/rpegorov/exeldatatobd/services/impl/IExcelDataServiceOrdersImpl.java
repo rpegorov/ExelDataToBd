@@ -31,7 +31,7 @@ public class IExcelDataServiceOrdersImpl implements IExcelDataServiceOrders {
     private final CreateArrList listService;
 
     /**
-     * DataFormatter contains methods for formatting the value stored in an Cell.
+     * DataFormatter contains methods for formatting the value stored in a Cell.
      * XSSFWorkbook object from a given file.
      * Workbook checks a Format file (.xlsx and .xls) else exception, no exception - handling e.printStackTrace
      * Checking for an empty string is needed to exclude such strings from falling into the list,
