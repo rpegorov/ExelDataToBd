@@ -52,7 +52,7 @@ from product p
 where product_type = 'QLIQ'
 
 -- products by date
-select p.amount, p.local_date
+select sum(p.amount)
 from product p
 where p.local_date = '2022-06-15'
 

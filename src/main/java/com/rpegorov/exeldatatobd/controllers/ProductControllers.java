@@ -1,16 +1,17 @@
 package com.rpegorov.exeldatatobd.controllers;
 
 import com.rpegorov.exeldatatobd.models.entity.Orders;
+import com.rpegorov.exeldatatobd.repositories.ProductRepo;
 import com.rpegorov.exeldatatobd.services.interf.IExcelDataServiceOrders;
 import com.rpegorov.exeldatatobd.services.interf.IFileUploaderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDate;
 
 /**
  * class controllers
@@ -21,6 +22,7 @@ public class ProductControllers {
 
     private final IFileUploaderService fileUploaderService;
     private final IExcelDataServiceOrders excelDataServiceOrders;
+    private final ProductRepo productRepo;
 
     /**
      * Start page
@@ -43,7 +45,7 @@ public class ProductControllers {
         fileUploaderService.uploadFile(file);
 
         redirectAttributes.addFlashAttribute("message",
-                "You have successfully uploaded '"+ file.getOriginalFilename()+"' !");
+                "You have successfully uploaded '" + file.getOriginalFilename() + "' !");
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -64,5 +66,11 @@ public class ProductControllers {
         var noOfRecords = excelDataServiceOrders.saveExcelData(excelDataAsList);
         model.addAttribute("noOfRecords", noOfRecords);
         return "success";
+    }
+
+    @GetMapping("/filter")
+    @ResponseBody
+    public Long searchDate(@RequestParam("date") String date) {
+        return productRepo.sumAmount(LocalDate.parse(date));
     }
 }
